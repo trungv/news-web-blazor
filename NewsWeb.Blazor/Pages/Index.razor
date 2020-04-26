@@ -1,0 +1,40 @@
+﻿@page "/"
+@using NewsWeb.Blazor.Data
+@inject DemoService Demo;
+
+<h1>Hello, world! Cái này là edit strang chủ nè</h1>
+
+Welcome to your new app.
+
+<div>
+    @code{
+        int hamso = 0;
+        protected override async Task OnInitializedAsync()
+        {
+            hamso = await Demo.Ham();
+        }
+
+        private void IncrementCount()
+        {
+            hamso+=5;
+        }
+    }
+    <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+    <table class="table">
+        <tr>
+            <td>@hamso</td>
+        </tr>
+        <tr>
+            <td>@hamso</td>
+        </tr>
+        <tr>
+            <td>dsadsadasdas</td>
+        </tr>
+        <tr>
+            <td>dsadsadasdas</td>
+        </tr>
+        <tr>
+            <td>dsadsadasdas</td>
+        </tr>
+    </table>
+</div>
