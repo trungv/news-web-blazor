@@ -1,14 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using NewsWeb.Blazor.Data;
+using NewsWeb.Core.DatabaseContext;
 
 namespace NewsWeb.Blazor
 {
@@ -29,6 +26,13 @@ namespace NewsWeb.Blazor
             services.AddServerSideBlazor();
             services.AddSingleton<WeatherForecastService>();
             services.AddSingleton<DemoService>();
+
+            RegisterEntityFrameworkMySql(services);
+        }
+
+        private void RegisterEntityFrameworkMySql(IServiceCollection services)
+        {
+            services.AddDbContext<NewsWebContext>(options => options.UseMySQL(Configuration["ConnectionStrings:MySqlConnection"]));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
